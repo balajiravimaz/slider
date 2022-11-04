@@ -24,11 +24,22 @@ btn[0].style.background = "white";
 btn.forEach((btns, i) => {
     btns.addEventListener("click", (e) => {
         slide.style.transform = `translateX(-${i * 100}%)`;
-        counter = counter + i;
-        e.target.style.background = "white";
+        counter = i + 1;
+        restBg();
+        btns.style.background = "white";
     })
 })
 
+const restBg = () => {
+    btn.forEach((list) => {
+        list.style.background = "transparent";
+    })
+}
+
+const changeBg = ()=>{
+    restBg();
+    btn[counter-1].style.background ="white";
+}
 
 // Arrows Navigation
 const nextSlide = () => {
@@ -53,9 +64,11 @@ const lastSlide = () => {
 
 right.addEventListener("click", () => {
     counter < len ? nextSlide() : firstSlide();
+    changeBg();
 })
 
 
 left.addEventListener("click", () => {
     counter > 1 ? prevSlide() : lastSlide();
+    changeBg();
 })
